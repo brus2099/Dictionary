@@ -27,28 +27,37 @@ print("#### #### #### #### #### #### #### #### #### #### #### #### ")
 for iter1 in range (0, row):
 
     if matriz[iter1][iter1] != 0:
-        print("Prosigue ==>")
-
-        if matriz[iter1][iter1] == 1:
-            print("Prosigue ==>")
-        
-        else:
-            print("Evaluacion2 creacion de un pivote == 1")
-            aux = matriz[iter1][iter1]
-            for eval2 in range (0, row):
-                matriz[iter1][eval2] = matriz[iter1][eval2] / aux
-
+        print("Prosigue1 ==>")
     else:
         print("Evaluacion1 elemento de la columna principal != 0")
-        aux = []
+        auxCambio = []
         for eval1 in range (0, row):
-            aux.append(matriz[iter1][eval1])
+            auxCambio.append(matriz[iter1][eval1])
             matriz[iter1][eval1] = matriz[iter1+1][eval1]
-            matriz[iter1+1][eval1] = aux[eval1]
-        
+            matriz[iter1+1][eval1] = auxCambio[eval1]
+
+
+    if matriz[iter1][iter1] == 1:
+        print("Prosigue2 ==>")
+    else:
+        print("Evaluacion2 creacion de un pivote == 1")
+        auxPivote = matriz[iter1][iter1]
+        for eval2 in range (0, row):
+            matriz[iter1][eval2] = matriz[iter1][eval2] / auxPivote
     
+    auxFila = matriz[iter1]
+    print(auxFila)
+    for avance1 in range (0, row):
+        auxMulti = matriz[avance1][iter1]
+        print(auxMulti)
+        for avance2 in range (0, row):
+            matriz[avance1][avance2] = matriz[avance1][avance2] - auxMulti*auxFila[avance2]
+    matriz[iter1] = auxFila
+    print(auxFila)
+    print(matriz[iter1])
+
     for i in range (0, row):
-        print("| ", end="")    
+        print("| ", end="")
         for j in range (0, row):
             print(matriz[i][j], " ", end="")
         print("|")
