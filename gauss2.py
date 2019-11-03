@@ -82,5 +82,6 @@ for iter1 in range (0, row):
             print("guardar: ", guardavalores)  
             print("matriz: ", matriz[avance1])  
     
+    matriz[iter1] = auxFila
 
     printMatriz(iter1)
