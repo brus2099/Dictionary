@@ -11,77 +11,76 @@ print()
 
 row = len(matriz)
 
+print("Matriz aumentada inicial: ")
 for i in range (0, row):
     print("| ", end="")    
     for j in range (0, row):
         print(matriz[i][j], " ", end="")
-    print("|")
-
-for i in range (0, row):
-    print(" ", matriz[i][i], end="")
+    print("|", src[i], "|")
 
 print()
-print("#### #### #### #### #### #### #### #### #### #### #### #### ")
-#### #### #### #### #### #### #### #### #### #### #### #### 
+print("Comienza la busqueda de soluciones mediante el metodo de Gauss-Jordan ")
 
-
-
-
-def printMatriz(x):
-    print("Matriz actual: ", x)
+def printMatriz():
+    print("Matriz actual: ")
     for i in range (0, row):
         print("| ", end="")    
         for j in range (0, row):
             print(matriz[i][j], " ", end="")
-        print("|")
-
+        print("|", src[i], "|")
 
 for iter1 in range (0, row):
 
     print()
     # Comprobar 0 en el elemento de la matriz principal
     if matriz[iter1][iter1] != 0:
-        print("Prosigue 1 ==>")
+        print("El elemento ", iter1, " de la diagonal principal es diferente de 0. No se realiza intercambio de renglones. Puede continuar :)")
     else:
-        print("Evaluacion1 elemento de la columna principal != 0")
+        print("Elemento de la columna principal != 0 mediante intercambio de renglones")
         auxCambio = []
         for eval1 in range (0, row):
             auxCambio.append(matriz[iter1][eval1])
             matriz[iter1][eval1] = matriz[iter1+1][eval1]
             matriz[iter1+1][eval1] = auxCambio[eval1]
-    printMatriz(iter1)
+        axuSoluc = src[iter1]
+        src[iter1] = src[iter1+1]
+        src[iter1+1] = axuSoluc
+    printMatriz()
 
     print()
     # Volver elemento de matrix principal == 1
     if matriz[iter1][iter1] == 1:
-        print("Prosigue2 ==>")
+        print("El elemento ", iter1, " de la diagonal principal ya es 1. No se realiza multiplicacion por un escalar. Puede continuar :)")
     else:
-        print("Evaluacion2 creacion de un pivote == 1")
+        print("Creacion de un pivote == 1 mediante multiplicacion con un escalar.")
         auxPivote = matriz[iter1][iter1]
         for eval2 in range (0, row):
             matriz[iter1][eval2] = matriz[iter1][eval2] / auxPivote
-    printMatriz(iter1)
+        src[iter1] = src[iter1]/auxPivote
+    printMatriz()
 
     print()
     #Operaciones por filas para crear columnas == 0
+    print("Creacion de ceros en la columna ", iter1)
+    # Guardar la fila actual en un auxiliar para usarlo en las operaciones por columnas, no la fila.
     auxFila = []
     for agreFila in range (0, row):
         auxFila.append(matriz[iter1][agreFila])
-    print(auxFila)
-
-    print("Fila auxiliar: ", auxFila)
+    auxSolFila = src[iter1]
     for avance1 in range (0, row):
-        
         auxMulti = matriz[avance1][iter1]
+        # Crear lista que guarde los resultados de las operaciones de acuerdo a la fila
         guardavalores = []
-        print("Multiplicador auxiliar", auxMulti)
         for avance2 in range (0, row):
-            print(matriz[avance1][avance2], " - ", auxMulti, " ( ", auxFila[avance2], " ) ")
             guardavalores.append(matriz[avance1][avance2] - auxMulti*auxFila[avance2])
+            # Y devolverle los valores obtenidos a la matriz original
             matriz[avance1][avance2] = guardavalores[avance2]
-            print("guardar: ", guardavalores)  
-            print("matriz: ", matriz[avance1])  
-    
+        src[avance1] = src[avance1] - auxMulti*auxSolFila
+    # Devolucion de la fila actual tras ser alterada por las operaciones por columnas
     matriz[iter1] = auxFila
+    src[iter1] = auxSolFila
+    printMatriz()
 
-    printMatriz(iter1)
+print()
+print("Las soluciones \"aproximadas\" del sistema de ecuaciones son: ", src)
+print("Considere esta aproximacion debido al trato con numeros flotantes que Python realiza.")
