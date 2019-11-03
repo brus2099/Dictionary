@@ -24,10 +24,24 @@ print()
 print("#### #### #### #### #### #### #### #### #### #### #### #### ")
 #### #### #### #### #### #### #### #### #### #### #### #### 
 
+
+
+
+def printMatriz(x):
+    print("Matriz actual: ", x)
+    for i in range (0, row):
+        print("| ", end="")    
+        for j in range (0, row):
+            print(matriz[i][j], " ", end="")
+        print("|")
+
+
 for iter1 in range (0, row):
 
+    print()
+    # Comprobar 0 en el elemento de la matriz principal
     if matriz[iter1][iter1] != 0:
-        print("Prosigue1 ==>")
+        print("Prosigue 1 ==>")
     else:
         print("Evaluacion1 elemento de la columna principal != 0")
         auxCambio = []
@@ -35,8 +49,10 @@ for iter1 in range (0, row):
             auxCambio.append(matriz[iter1][eval1])
             matriz[iter1][eval1] = matriz[iter1+1][eval1]
             matriz[iter1+1][eval1] = auxCambio[eval1]
+    printMatriz(iter1)
 
-
+    print()
+    # Volver elemento de matrix principal == 1
     if matriz[iter1][iter1] == 1:
         print("Prosigue2 ==>")
     else:
@@ -44,21 +60,27 @@ for iter1 in range (0, row):
         auxPivote = matriz[iter1][iter1]
         for eval2 in range (0, row):
             matriz[iter1][eval2] = matriz[iter1][eval2] / auxPivote
-    
-    auxFila = matriz[iter1]
+    printMatriz(iter1)
+
+    print()
+    #Operaciones por filas para crear columnas == 0
+    auxFila = []
+    for agreFila in range (0, row):
+        auxFila.append(matriz[iter1][agreFila])
     print(auxFila)
+
+    print("Fila auxiliar: ", auxFila)
     for avance1 in range (0, row):
+        
         auxMulti = matriz[avance1][iter1]
-        print(auxMulti)
+        guardavalores = []
+        print("Multiplicador auxiliar", auxMulti)
         for avance2 in range (0, row):
-            matriz[avance1][avance2] = matriz[avance1][avance2] - auxMulti*auxFila[avance2]
-    matriz[iter1] = auxFila
-    print(auxFila)
-    print(matriz[iter1])
+            print(matriz[avance1][avance2], " - ", auxMulti, " ( ", auxFila[avance2], " ) ")
+            guardavalores.append(matriz[avance1][avance2] - auxMulti*auxFila[avance2])
+            matriz[avance1][avance2] = guardavalores[avance2]
+            print("guardar: ", guardavalores)  
+            print("matriz: ", matriz[avance1])  
+    
 
-    for i in range (0, row):
-        print("| ", end="")
-        for j in range (0, row):
-            print(matriz[i][j], " ", end="")
-        print("|")
-
+    printMatriz(iter1)
