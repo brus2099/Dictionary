@@ -1,5 +1,5 @@
 propuesta = [2, 1]
-
+x, y = propuesta
 
 def matrizDerivadas(prop):
     return [[2*prop[0], 2*prop[1]], [prop[1], prop[0]]]
@@ -25,7 +25,7 @@ def gauss(deriv, func):
         if deriv[iter1][iter1] != 0:
             muestraMatriz(deriv, func)
         else:
-            print("Elemento de la columna principal != 0 mediante intercambio de renglones")
+            print("Intercambio de renglones")
             auxCambio = []
             for eval1 in range (0, 2):
                 auxCambio.append(deriv[iter1][eval1])
@@ -41,13 +41,14 @@ def gauss(deriv, func):
         if deriv[iter1][iter1] == 1:
             muestraMatriz(deriv, func)
         else:
-            print("Creacion de un pivote == 1 mediante multiplicacion con un escalar.")
+            print("Multiplicacion con un escalar.")
             auxPivote = deriv[iter1][iter1]
             for eval2 in range (0, 2):
                 deriv[iter1][eval2] = deriv[iter1][eval2] / auxPivote
             func[iter1] = func[iter1]/auxPivote
             muestraMatriz(deriv, func)
 
+        print("Ceros en columnas")
         auxFila = []
         for agreFila in range (0, 2):
             auxFila.append(deriv[iter1][agreFila])
@@ -62,6 +63,11 @@ def gauss(deriv, func):
         deriv[iter1] = auxFila
         func[iter1] = auxSolFila
         muestraMatriz(deriv, func)
+    return deriv, func
 
 muestraMatriz(matrizDerivadas(propuesta), matrizFunciones(propuesta))
-gauss(matrizDerivadas(propuesta), matrizFunciones(propuesta))
+matIdentidad, matAumento = gauss(matrizDerivadas(propuesta), matrizFunciones(propuesta))
+print(matIdentidad)
+print(matAumento)
+x, y = propuesta[0] + matAumento[0], propuesta[1] + matAumento[1]
+print("Punto se encuentra en ( ", x, " , ", y, ")")
