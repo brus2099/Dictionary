@@ -1,4 +1,4 @@
-propuesta = [2, 1]
+propuesta = [-1, -2]
 x, y = propuesta
 
 def matrizDerivadas(prop):
@@ -8,9 +8,9 @@ def matrizDerivadas(prop):
 def matrizFunciones(prop):
     return [-(prop[0]**2)-(prop[1]**2)+3, -(prop[0]*prop[1])+1]
 
-
-print(matrizDerivadas(propuesta))
-print(matrizFunciones(propuesta))
+print("Ejemplo con propuesta inicial: ", propuesta)
+print("Matriz de derivadas: ", matrizDerivadas(propuesta))
+print("Sustitucion en ambas ecuaciones: ", matrizFunciones(propuesta))
 
 def muestraMatriz(deriv, func):
     print("Matriz actual: ")
@@ -67,7 +67,5 @@ def gauss(deriv, func):
 
 muestraMatriz(matrizDerivadas(propuesta), matrizFunciones(propuesta))
 matIdentidad, matAumento = gauss(matrizDerivadas(propuesta), matrizFunciones(propuesta))
-print(matIdentidad)
-print(matAumento)
 x, y = propuesta[0] + matAumento[0], propuesta[1] + matAumento[1]
 print("Punto se encuentra en ( ", x, " , ", y, ")")

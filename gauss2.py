@@ -46,7 +46,7 @@ for iter1 in range (0, row):
     print()
     # Comprobar 0 en el elemento de la matriz principal
     if matriz[iter1][iter1] != 0:
-        print("El elemento ", iter1, " de la diagonal principal es diferente de 0. No se realiza intercambio de renglones. Puede continuar :)")
+        print("El elemento ", iter1, " de la diagonal principal es diferente de 0. No se realiza intercambio de renglones. Puede continuar.")
     else:
         print("Elemento de la columna principal != 0 mediante intercambio de renglones")
         auxCambio = []
@@ -62,7 +62,7 @@ for iter1 in range (0, row):
     print()
     # Volver elemento de matrix principal == 1
     if matriz[iter1][iter1] == 1:
-        print("El elemento ", iter1, " de la diagonal principal ya es 1. No se realiza multiplicacion por un escalar. Puede continuar :)")
+        print("El elemento ", iter1, " de la diagonal principal ya es 1. No se realiza multiplicacion por un escalar. Puede continuar.")
     else:
         print("Creacion de un pivote == 1 mediante multiplicacion con un escalar.")
         auxPivote = matriz[iter1][iter1]
