@@ -1,4 +1,3 @@
-
 from sympy.abc import x
 from sympy.utilities.lambdify import lambdify, implemented_function
 from sympy import Function
